@@ -2,6 +2,8 @@ import pytorch
 import numpy as np
 from torchvision import datasets
 import torchvision.transforms as transforms
+import matplotlib.pyplot as plt
+%matplotlib inline
 
 # number of subprocesses to use for data loading
 num_workers = 0
