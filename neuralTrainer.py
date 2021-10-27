@@ -60,6 +60,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 from torchsummary import summary
 
+device = "cuda" if torch.cuda.is_available() else "cpu"
 ## Define the NN architecture
 class NeuralNet(nn.Module):
     def __init__(self):
@@ -81,7 +82,8 @@ class NeuralNet(nn.Module):
         return x
 
 # initialize the NN
-model = NeuralNet()
+model = NeuralNet().to(device)
+print(model)
 summary(model, input_size=(1, 28, 28))
 
 ## Specify loss and optimization functions
@@ -90,10 +92,10 @@ summary(model, input_size=(1, 28, 28))
 criterion = nn.CrossEntropyLoss()
 
 # specify optimizer
-optimizer = torch.optim.SGD(model.parameters(), lr=0.01)
+optimizer = torch.optim.SGD(model.parameters(), lr=0.001)
 
 # number of epochs to train the model
-n_epochs = 50  # suggest training between 20-50 epochs
+n_epochs = 25  # suggest training between 20-50 epochs
 
 # Set model to the training mode
 model.train()
@@ -191,3 +193,4 @@ for idx in np.arange(batch_size):
     ax.imshow(np.squeeze(images[idx]), cmap='gray')
     ax.set_title("{} ({})".format(str(preds[idx].item()), str(labels[idx].item())),
                  color=("green" if preds[idx]==labels[idx] else "red"))
+torch.save(model, 'model.pth')
