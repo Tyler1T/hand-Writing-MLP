@@ -1,7 +1,6 @@
 import torch
 import numpy as np
 import matplotlib.pyplot as plt
-%matplotlib inline
 
 # obtain one batch of training images
 dataiter = iter(train_loader)
