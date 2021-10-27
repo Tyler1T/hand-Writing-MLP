@@ -7,10 +7,10 @@ class NeuralNet(nn.Module):
     def __init__(self):
         super(NeuralNet, self).__init__()
         # linear layer 28*28 input into 16 nodes
-        self.fc1 = nn.Linear(28 * 28, 16)
+        self.fc1 = nn.Linear(28 * 28, 50)
 
         # linear layer (n_hidden -> 10)
-        self.fc2 = nn.Linear(16, 10)
+        self.fc2 = nn.Linear(50, 10)
 
     def forward(self, x):
         # flatten image input
