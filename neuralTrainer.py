@@ -194,7 +194,7 @@ for idx in np.arange(batch_size):
     ax.set_title("{} ({})".format(str(preds[idx].item()), str(labels[idx].item())),
                  color=("green" if preds[idx]==labels[idx] else "red"))
 torch.save(model, 'model.pth')
-f = open("hiddenLayerValues.txt", "a")
+f = open("hiddenLayerValues.txt", "w")
 for name, param in model.named_parameters():
     f.write(f"Layer: {name} | Size: {param.size()} | Value: {param[:2]}\n")
 f.close()
