@@ -8,7 +8,7 @@ import torchvision.transforms as transforms
 # number of subprocesses to use for data loading
 num_workers = 0
 # how many samples per batch to load
-batch_size = 20
+batch_size = 10
 
 # convert data to torch.FloatTensor
 transform = transforms.ToTensor()
@@ -92,10 +92,10 @@ summary(model, input_size=(1, 28, 28))
 criterion = nn.CrossEntropyLoss()
 
 # specify optimizer
-optimizer = torch.optim.SGD(model.parameters(), lr=0.01)
+optimizer = torch.optim.SGD(model.parameters(), lr=0.001)
 
 # number of epochs to train the model
-n_epochs = 10  # suggest training between 20-50 epochs
+n_epochs = 50  # suggest training between 20-50 epochs
 
 # Set model to the training mode
 model.train()
