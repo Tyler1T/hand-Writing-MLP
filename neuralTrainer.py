@@ -7,6 +7,7 @@ import torch.cuda as cuda
 import torch.nn as nn
 import torch.nn.functional as F
 from torchsummary import summary
+import json
 
 
 torch.set_default_tensor_type('torch.cuda.FloatTensor')
@@ -155,8 +156,51 @@ print('\nTest Accuracy (Overall): %2d%% (%2d/%2d)' % (
     100. * np.sum(class_correct) / np.sum(class_total),
     np.sum(class_correct), np.sum(class_total)))
 
-torch.save(model.cpu(), 'model.pth')
-f = open("hiddenLayerValues.txt", "w")
-for name, param in model.named_parameters():
-    f.write(f"Layer: {name} | Size: {param.size()} | Value: {param[:2]}\n")
-f.close()
+model.cpu()
+
+torch.save(model, 'model.pth')
+
+bias_hidden = model.fc1.bias.data.numpy()
+bias_output = model.fc2.bias.data.numpy()
+
+weight_hidden = model.fc1.weight.data.numpy()
+weight_output = model.fc2.weight.data.numpy()
+
+
+#Combining all Weights and Biases
+data = {
+
+    "fc1bias":np.array(bias_hidden, dtype="float32").tolist(),
+    "fc2bias":np.array(bias_output, dtype="float32").tolist(),
+    "fc1_Weight":np.array(weight_hidden, dtype="float32").tolist(),
+    "fc2_Weight":np.array(weight_output, dtype="float32").tolist()
+}
+# Storing Biases
+data0 = {
+    "fc1bias":np.array(bias_hidden, dtype="float32").tolist(),
+}
+
+data1 = {
+    "fc2bias":np.array(bias_output, dtype="float32").tolist()
+}
+# Storing Weights
+data2 = {
+    "fc1_Weight":np.array(weight_hidden, dtype="float32").tolist(),
+}
+data3 = {
+    "fc2_Weight":np.array(weight_output, dtype="float32").tolist()
+}
+
+#Storing all weights and biases in one file
+with open("weight_bias_combined.json", "w") as file:
+    json.dump(data,file,indent = 1)
+
+#Storing weights and biases in their own files
+with open("fc1bias.json", "w") as file:
+    json.dump(data0,file,indent = 1)
+with open("fc2bias.json", "w") as file:
+    json.dump(data1,file,indent = 1)
+with open("fc1_Weight.json", "w") as file:
+    json.dump(data2,file,indent = 1)
+with open("fc2_Weight.json", "w") as file:
+    json.dump(data3,file,indent = 1)
