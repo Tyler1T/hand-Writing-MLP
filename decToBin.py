@@ -33,7 +33,7 @@ def convert(num):
         bin.append("1")
         num =- 1
 
-    for i in range(0, 15):
+    for i in range(1, 15):
         if(num_mag - 2**-i < 0):
             bin.append("0")
         else:
@@ -41,12 +41,12 @@ def convert(num):
             num_mag =- 2**-i
 
     if(num_original < 0):
-        for i in range(0, 15):
+        for i in range(1, 15):
             if(bin[i] == '1'): bin[i] = '0'
             else: bin[i] = '1'
 
         carry = 1
-        for i in range(0, 15):
+        for i in range(1, 15):
             if(bin[i] == '1' and carry == 0):
                 bin[i] = '1'
             elif(bin[i] == '1' and carry == 1):
@@ -61,30 +61,26 @@ def convert(num):
 
 
 
-f = open("fc1bias.txt", "a")
-f.truncate()
+f = open("fc1bias.txt", "w")
 for i in data0['fc1bias']:
     f.write(convert(i) + "\n")
 f.close()
 
 
-f = open("fc2bias.txt", "a")
-f.truncate()
+f = open("fc2bias.txt", "w")
 for i in data1['fc2bias']:
     f.write(convert(i) + "\n")
 f.close()
 
 
-f = open("fc1_Weight.txt", "a")
-f.truncate()
+f = open("fc1_Weight.txt", "w")
 for j in range(0, 50):
     for i in data2['fc1_Weight'][j]:
         f.write(convert(i) + "\n")
 f.close()
 
 
-f = open("fc2_Weight.txt", "a")
-f.truncate()
+f = open("fc2_Weight.txt", "w")
 for j in range(0, 10):
     for i in data3['fc2_Weight'][j]:
         f.write(convert(i) + "\n")
