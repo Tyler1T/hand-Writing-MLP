@@ -1,14 +1,22 @@
  # import libraries
 import torch
 import numpy as np
-
 from torchvision import datasets
 import torchvision.transforms as transforms
+import torch.cuda as cuda
+import torch.nn as nn
+import torch.nn.functional as F
+from torchsummary import summary
+
+
+torch.set_default_tensor_type('torch.cuda.FloatTensor')
+device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+
 
 # number of subprocesses to use for data loading
 num_workers = 0
 # how many samples per batch to load
-batch_size = 10
+batch_size = 16
 
 # convert data to torch.FloatTensor
 transform = transforms.ToTensor()
@@ -25,20 +33,20 @@ train_loader = torch.utils.data.DataLoader(train_data, batch_size=batch_size,
 test_loader = torch.utils.data.DataLoader(test_data, batch_size=batch_size,
     num_workers=num_workers)
 
-import torch.nn as nn
-import torch.nn.functional as F
-from torchsummary import summary
 
-#device = "cuda" if torch.cuda.is_available() else "cpu"
 ## Define the NN architecture
 class NeuralNet(nn.Module):
     def __init__(self):
         super(NeuralNet, self).__init__()
         # linear layer 28*28 input into 16 nodes
         self.fc1 = nn.Linear(28 * 28, 50)
+        self.fc1.to(device)
 
         # linear layer (n_hidden -> 10)
         self.fc2 = nn.Linear(50, 10)
+        self.fc2.to(device)
+
+
 
     def forward(self, x):
         # flatten image input
@@ -51,8 +59,7 @@ class NeuralNet(nn.Module):
         return x
 
 # initialize the NN
-model = NeuralNet()
-print(model.fc1)
+model = NeuralNet().to(device)
 summary(model, input_size=(1, 28, 28))
 
 ## Specify loss and optimization functions
@@ -77,6 +84,8 @@ for epoch in range(n_epochs):
     # train the model #
     ###################
     for data, target in train_loader:
+        data, target = data.to(device), target.to(device)
+
         # clear the gradients of all optimized variables
         optimizer.zero_grad()
         # forward pass: compute predicted outputs by passing inputs to the model
@@ -109,6 +118,8 @@ class_total = list(0. for i in range(10))
 model.eval()
 
 for data, target in test_loader:
+    data, target = data.to(device), target.to(device)
+
     # forward pass: compute predicted outputs by passing inputs to the model
     output = model(data)
     # calculate the loss
@@ -144,18 +155,7 @@ print('\nTest Accuracy (Overall): %2d%% (%2d/%2d)' % (
     100. * np.sum(class_correct) / np.sum(class_total),
     np.sum(class_correct), np.sum(class_total)))
 
-# obtain one batch of test images
-dataiter = iter(test_loader)
-images, labels = dataiter.next()
-
-# get sample outputs
-output = model(images)
-# convert output probabilities to predicted class
-_, preds = torch.max(output, 1)
-# prep images for display
-images = images.numpy()
-
-torch.save(model, 'model.pth')
+torch.save(model.cpu(), 'model.pth')
 f = open("hiddenLayerValues.txt", "w")
 for name, param in model.named_parameters():
     f.write(f"Layer: {name} | Size: {param.size()} | Value: {param[:2]}\n")
