@@ -72,7 +72,7 @@ criterion = nn.CrossEntropyLoss()
 optimizer = torch.optim.SGD(model.parameters(), lr=0.001)
 
 # number of epochs to train the model
-n_epochs = 1  # suggest training between 20-50 epochs
+n_epochs = 1000  # suggest training between 20-50 epochs
 
 # Set model to the training mode
 model.train()
