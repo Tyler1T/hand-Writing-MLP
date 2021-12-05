@@ -9,6 +9,8 @@ module neuron_layer1(data, neuron, out);
     logic [15:0] sum;
     logic [15:0] temp;
 
+    wire to_ReLU;
+
     regfile_bias1 bias(neuron, bias);
 
     for(int i = 0; i < 784; i++){
