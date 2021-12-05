@@ -36,6 +36,8 @@ module neuron_layer2(data, bias, neuron, out);
     logic [15:0] sum;
     logic [15:0] temp;
 
+    regfile_bias2 bias(neuron, bias);
+
     for(int i = 0; i < 768; i++){
         assign ra1 = {neuron, i};
         regfile_weight2 weight(ra1, weight);
@@ -56,6 +58,8 @@ module neuron_layer3(data, bias, neuron, out);
     logic [15:0] weight;
     logic [15:0] sum;
     logic [15:0] temp;
+
+    regfile_bias3 bias(neuron, bias);
 
     for(int i = 0; i < 768; i++){
         assign ra1 = {neuron, i};
