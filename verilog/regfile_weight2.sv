@@ -1,5 +1,5 @@
 module regfile_weight1(input  logic        clk,
-                input  logic [17:0] ra1,
+                input  logic [13:0] ra1,
                 output logic [15:0] rd1);
 
     // one port register file

@@ -1,5 +1,5 @@
 module regfile_bias2(input  logic        clk,
-                input  logic [6:0] ra1,
+                input  logic [5:0] ra1,
                 output logic [15:0] rd1);
 
     // one port register file
