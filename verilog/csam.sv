@@ -1,8 +1,8 @@
-module csam(Z, X, Y);
+module csam(rounded, X, Y);
 
         input logic [15:0] Y;
         input logic [15:0] X;
-        output logic [31:0] Z;
+        logic [31:0] Z;
         output logic [15:0] rounded;
 
 
