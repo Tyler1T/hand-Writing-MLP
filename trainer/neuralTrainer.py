@@ -17,7 +17,7 @@ device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 # number of subprocesses to use for data loading
 num_workers = 0
 # how many samples per batch to load
-batch_size = 16
+batch_size = 64
 
 # convert data to torch.FloatTensor
 transform = transforms.ToTensor()
@@ -40,12 +40,15 @@ class NeuralNet(nn.Module):
     def __init__(self):
         super(NeuralNet, self).__init__()
         # linear layer 28*28 input into 16 nodes
-        self.fc1 = nn.Linear(28 * 28, 50)
+        self.fc1 = nn.Linear(28 * 28, 200)
         self.fc1.to(device)
 
-        # linear layer (n_hidden -> 10)
-        self.fc2 = nn.Linear(50, 10)
+        self.fc2 = nn.Linear(200, 50)
         self.fc2.to(device)
+
+        # linear layer (n_hidden -> 10)
+        self.fc3 = nn.Linear(50, 10)
+        self.fc3.to(device)
 
 
 
@@ -54,8 +57,10 @@ class NeuralNet(nn.Module):
         x = x.view(-1, 28 * 28)
         # add hidden layer, with relu activation function
         x = F.relu(self.fc1(x))
+        # add hidden layer, with relu activation function
+        x = F.relu(self.fc2(x))
 
-        x = self.fc2(x)
+        x = self.fc3(x)
 
         return x
 
@@ -69,10 +74,10 @@ summary(model, input_size=(1, 28, 28))
 criterion = nn.CrossEntropyLoss()
 
 # specify optimizer
-optimizer = torch.optim.SGD(model.parameters(), lr=0.001)
+optimizer = torch.optim.SGD(model.parameters(), lr=0.01)
 
 # number of epochs to train the model
-n_epochs = 1000  # suggest training between 20-50 epochs
+n_epochs = 100  # suggest training between 20-50 epochs
 
 # Set model to the training mode
 model.train()

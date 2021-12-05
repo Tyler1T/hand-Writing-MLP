@@ -1,7 +1,7 @@
 import json
 import os
 import numpy as np
-
+from float2fixed import convert
 
 #Pulling weights and biases into their own array
 with open("fc1bias.json", "r") as file:
@@ -21,7 +21,7 @@ with open("fc2_Weight.json", "r") as file:
         "fc2_Weight":np.array(json.load(file)["fc2_Weight"]).tolist()
     }
 
-def convert(num):
+def test(num):
     num_original = num
     num_mag = abs(num)
 
@@ -63,27 +63,27 @@ def convert(num):
 
 f = open("fc1bias.txt", "w")
 for i in data0['fc1bias']:
-    f.write(convert(i) + "\n")
+    f.write(convert(i, 1, 15) + "\n")
 f.close()
 
 
 f = open("fc2bias.txt", "w")
 for i in data1['fc2bias']:
-    f.write(convert(i) + "\n")
+    f.write(convert(i, 1, 15) + "\n")
 f.close()
 
 
 f = open("fc1_Weight.txt", "w")
 for j in range(0, 50):
     for i in data2['fc1_Weight'][j]:
-        f.write(convert(i) + "\n")
+        f.write(convert(i, 1, 15) + "\n")
 f.close()
 
 
 f = open("fc2_Weight.txt", "w")
 for j in range(0, 10):
     for i in data3['fc2_Weight'][j]:
-        f.write(convert(i) + "\n")
+        f.write(convert(i, 1, 15) + "\n")
 f.close()
 # for i in data1['fc1_Weight'][49]:
 #     print(i)
