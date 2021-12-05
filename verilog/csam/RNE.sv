@@ -1,4 +1,4 @@
-module RNE16(input logic[18:0] big,
+module RNE(input logic[18:0] big,
             output logic [15:0] rounded);
 
     assign rounded[15:1] = big[18:3];

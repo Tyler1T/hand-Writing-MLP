@@ -8,6 +8,11 @@ module regfile_weight1(input  logic [17:0] ra1,
 
     logic [15:0] rf[17:0];
     // rf is register file, 15:0 is data size and 17:0 is file length
+   initial
+     begin
+	        $readmemb("./weight1.txt", rf1);
+     end
+
 
    assign rd1 = rf[ra1];
 
