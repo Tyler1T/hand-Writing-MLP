@@ -165,35 +165,45 @@ model.cpu()
 
 torch.save(model, 'model.pth')
 
-bias_hidden = model.fc1.bias.data.numpy()
-bias_output = model.fc2.bias.data.numpy()
+bias_hidden1 = model.fc1.bias.data.numpy()
+bias_hidden2 = model.fc2.bias.data.numpy()
+bias_output = model.fc3.bias.data.numpy()
 
-weight_hidden = model.fc1.weight.data.numpy()
-weight_output = model.fc2.weight.data.numpy()
+weight_hidden1 = model.fc1.weight.data.numpy()
+weight_hidden2 = model.fc2.weight.data.numpy()
+weight_output = model.fc3.weight.data.numpy()
 
 
 #Combining all Weights and Biases
 data = {
-
-    "fc1bias":np.array(bias_hidden, dtype="float32").tolist(),
-    "fc2bias":np.array(bias_output, dtype="float32").tolist(),
-    "fc1_Weight":np.array(weight_hidden, dtype="float32").tolist(),
-    "fc2_Weight":np.array(weight_output, dtype="float32").tolist()
+    "fc1bias":np.array(bias_hidden1, dtype="float32").tolist(),
+    "fc2bias":np.array(bias_hidden2, dtype="float32").tolist(),
+    "fc3bias":np.array(bias_output, dtype="float32").tolist(),
+    "fc1_Weight":np.array(weight_hidden1, dtype="float32").tolist(),
+    "fc2_Weight":np.array(weight_hidden2, dtype="float32").tolist(),
+    "fc3_Weight":np.array(weight_output, dtype="float32").tolist()
 }
+
 # Storing Biases
 data0 = {
-    "fc1bias":np.array(bias_hidden, dtype="float32").tolist(),
+    "fc1bias":np.array(bias_hidden1, dtype="float32").tolist(),
+}
+data1 = {
+    "fc2bias":np.array(bias_hidden2, dtype="float32").tolist()
+}
+data2 = {
+    "fc3bias":np.array(bias_output, dtype="float32").tolist()
 }
 
-data1 = {
-    "fc2bias":np.array(bias_output, dtype="float32").tolist()
-}
 # Storing Weights
-data2 = {
-    "fc1_Weight":np.array(weight_hidden, dtype="float32").tolist(),
-}
 data3 = {
-    "fc2_Weight":np.array(weight_output, dtype="float32").tolist()
+    "fc1_Weight":np.array(weight_hidden1, dtype="float32").tolist(),
+}
+data4 = {
+    "fc2_Weight":np.array(weight_hidden2, dtype="float32").tolist()
+}
+data5 = {
+    "fc3_Weight":np.array(weight_output, dtype="float32").tolist()
 }
 
 #Storing all weights and biases in one file
@@ -205,7 +215,11 @@ with open("fc1bias.json", "w") as file:
     json.dump(data0,file,indent = 1)
 with open("fc2bias.json", "w") as file:
     json.dump(data1,file,indent = 1)
-with open("fc1_Weight.json", "w") as file:
+with open("fc3bias.json", "w") as file:
     json.dump(data2,file,indent = 1)
-with open("fc2_Weight.json", "w") as file:
+with open("fc1_Weight.json", "w") as file:
     json.dump(data3,file,indent = 1)
+with open("fc2_Weight.json", "w") as file:
+    json.dump(data4,file,indent = 1)
+with open("fc3_Weight.json", "w") as file:
+    json.dump(data5,file,indent = 1)
