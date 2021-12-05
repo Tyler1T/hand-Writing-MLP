@@ -3,3 +3,4 @@
 *.pth
 *.json
 *.txt
+**/work

@@ -1,0 +1,39 @@
+# do CSAM.do
+# Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
+# Start time: 09:53:14 on Dec 05,2021
+# vlog BCLG.sv CLA_with_BCLG2.sv CLA_with_BCLG4.sv CLA_with_BCLG8.sv CSAM_tb.sv RCA_GP.sv RNE.sv adder.sv csam.sv fullAdder.sv fullNAdder.sv halfAdder.sv halfAdderNoC.sv halfNAdder.sv matrix.sv multiplier.sv neuron.sv partialNProduct.sv partialProduct.sv reducedFullAdder.sv reducedHalfAdder.sv summation.sv 
+# -- Compiling module BCLG
+# -- Compiling module CLA_with_BCLG2
+# -- Compiling module CLA_with_BCLG4
+# -- Compiling module CLA_with_BCLG8
+# -- Compiling module stimulus
+# -- Compiling module RCA_GP
+# -- Compiling module RNE16
+# -- Compiling module adder
+# -- Compiling module csam
+# -- Compiling module fullAdder
+# -- Compiling module fullNAdder
+# -- Compiling module halfAdder
+# -- Compiling module halfAdderNoC
+# -- Compiling module halfNAdder
+# -- Compiling module Mat_mult
+# -- Compiling module multiplier
+# -- Compiling module neuron
+# ** Error: (vlog-13069) neuron.sv(2): near "int": syntax error, unexpected int, expecting IDENTIFIER or genvar.
+# 
+# ** Error: neuron.sv(2): (vlog-13205) Syntax error found in the scope following 'i'. Is there a missing '::'?
+# 
+# -- Compiling module partialNProduct
+# -- Compiling module partialProduct
+# -- Compiling module reducedFullAdder
+# -- Compiling module reducedHalfAdder
+# -- Compiling module summation
+# ** Error: (vlog-13069) summation.sv(3): near "output": syntax error, unexpected output, expecting ')'.
+# 
+# End time: 09:53:14 on Dec 05,2021, Elapsed time: 0:00:00
+# Errors: 3, Warnings: 0
+# ** Error: C:/Modeltech_pe_edu_10.4a/win32pe_edu/vlog failed.
+# Error in macro ./CSAM.do line 30
+# C:/Modeltech_pe_edu_10.4a/win32pe_edu/vlog failed.
+#     while executing
+# "vlog *.sv"
