@@ -66,7 +66,6 @@ for i in data0['fc1bias']:
     f.write(convert(i, 1, 15) + "\n")
 f.close()
 
-
 f = open("fc2bias.txt", "w")
 for i in data1['fc2bias']:
     f.write(convert(i, 1, 15) + "\n")

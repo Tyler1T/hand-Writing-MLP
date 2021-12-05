@@ -1,21 +1,21 @@
 module stimulus();
 
-  logic [3:0] Y;
-  logic [7:0] X;
-  logic [11:0] Z;
+  logic [15:0] Y;
+  logic [15:0] X;
+  logic [15:0] Z;
 
-  logic [11:0] answer;
+  logic [15:0] answer;
   logic clk;
 
   //for five vector numbers we need 3 bits
   logic [31:0] vectornum, errors;
 
-  //the testvector file should be 5 rows each 27 bits wide
-  logic [26:0] testVector[5:0];
+  //the testvector file should be 2 rows each 47 bits wide
+  logic [47:0] testVector[1:0];
 
 
   // Instantiate DUT
-  CSAM2C dut(answer, X, Y);
+  csam dut(answer, X, Y);
   always
     begin
       clk = 1; #5;
