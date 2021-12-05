@@ -10,7 +10,7 @@ module regfile_bias1(input  logic [7:0] ra1,
     // rf is register file, 15:0 is data size and 14:0 is file length
    initial
      begin
-	        $readmemb("./table.bin", ra1);
+	        $readmemb("./bias1.txt", ra1);
      end
 
    assign rd1 = rf[ra1];
