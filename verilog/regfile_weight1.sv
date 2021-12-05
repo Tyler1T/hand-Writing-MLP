@@ -1,4 +1,4 @@
-module regfile_weight1(input  logic [15:0] ra1,
+module regfile_weight1(input  logic [17:0] ra1,
                 output logic [15:0] rd1);
 
     // one port register file
