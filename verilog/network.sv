@@ -1,5 +1,5 @@
-module network (picture, result);
-    input logic [0:15] picture [783:0];
+module network (data, result);
+    input logic [0:15] data [783:0];
     output logic [0:15] result[9:0]
     wire [0:15] layer1_output[199:0];
     wire [0:15] layer2_output[49:0];
