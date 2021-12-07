@@ -577,5 +577,5 @@ module csam(rounded, X, Y);
         fullAdder CPA14(carry16[13],Z[29],carry15[13],carry16[12],sum15[14]);
         fullAdder CPA15(Z[31],Z[30],carry15[14],carry16[13],sum15[15]);
 
-        RNE rounder(Z[31:14], rounded[15:0]);
+        RNE rounder(Z[29:12], rounded[15:0]);
 endmodule
