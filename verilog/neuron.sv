@@ -3,11 +3,9 @@ module neuron_layer1(data, neuron, out);
     input logic [0:15] data[783:0];
     output logic out[15:0];
 
-    logic [15:0] bias;
     logic [17:0] ra1;
-    logic [15:0] weight;
     logic [15:0] sum;
-    logic [15:0] temp;
+    wire temp, weight, bias;
 
     wire to_ReLU;
 
@@ -31,9 +29,8 @@ module neuron_layer2(data, neuron, out);
     output logic out[15:0];
 
     logic [17:0] ra1;
-    logic [15:0] weight;
     logic [15:0] sum;
-    logic [15:0] temp;
+    wire temp, weight, bias;
 
     regfile_bias2 bias(neuron, bias);
 
@@ -44,6 +41,8 @@ module neuron_layer2(data, neuron, out);
         CLA_with_BCLG16 adder(temp, sum, 1'b0, sum);
     }
 
+    CLA_with_BCLG16 adder(sum, bias, 1'b0, to_ReLU);
+
     ReLU activation(sum, out);
 endmodule // 2nd hidden layer neuron, 50 neurons
 
@@ -53,9 +52,8 @@ module neuron_layer3(data, neuron, out);
     output logic out[15:0];
 
     logic [17:0] ra1;
-    logic [15:0] weight;
     logic [15:0] sum;
-    logic [15:0] temp;
+    wire temp, weight, bias;
 
     regfile_bias3 bias(neuron, bias);
 
@@ -63,7 +61,10 @@ module neuron_layer3(data, neuron, out);
         assign ra1 = {neuron, i};
         regfile_weight3 weight(ra1, weight);
         csam multiplier(temp, weight, data[i])
-        CLA_with_BCLG16 adder(temp, sum, 1'b0, out);
+        CLA_with_BCLG16 adder(temp, sum, 1'b0, sum);
     }
+
+    CLA_with_BCLG16 adder(sum, bias, 1'b0, to_ReLU);
+
 
 endmodule // output layer neuron, 10 neurons
