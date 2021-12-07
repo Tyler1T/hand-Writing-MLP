@@ -28,8 +28,6 @@ def convert(n, q1, q2):
 
   #Do the overflow.
   bMantissa = bMantissa[-q1:]
-  print(bMantissa)
-  #print(fOrdinate)
 
   #Fix up the binary ordinate
   bOrdinate = ''
@@ -39,6 +37,7 @@ def convert(n, q1, q2):
     bOrdinate = bOrdinate + str(digit)
     fOrdinate = k - int(k)
 
+    print(bMantissa + "_" + bOrdinate)
     binary = twosComplement(bMantissa, bOrdinate, q1, q2)
     return binary
 
@@ -67,3 +66,45 @@ def twosComplement(bMantissa, bOrdinate, q1, q2):
 
 
       return "".join(bString)
+
+def convertFloat2Fixed(n, q1, q2):
+
+  if (n < 0):
+    negFlag = 1
+  else:
+    negFlag = 0
+
+  numberStr = str(n)
+  pointIdx = numberStr.find('.')
+
+  #Find mantissa and ordinates
+  mantissa = numberStr[0 : pointIdx]
+  ordinate = '0.' + numberStr[pointIdx + 1 : ]
+
+  bMantissa = str(bin(int(mantissa)))
+  fOrdinate = float(ordinate)
+
+  #Convert the binary mantissa to a width of q1
+  #Index of 'b'
+  bIdx = bMantissa.find('b')
+  bMantissa = bMantissa[bIdx + 1 :]
+
+  #For positive numbers, go on including a '0' at the MSB
+  while (len(bMantissa) < q1):
+    bMantissa = '0' + bMantissa
+
+  #Do the overflow.
+  bMantissa = bMantissa[-q1:]
+  print(bMantissa)
+  #print(fOrdinate)
+
+  #Fix up the binary ordinate
+  bOrdinate = ''
+  for i in range(0, q2):
+    k = 2*fOrdinate
+    digit = int(k)
+    bOrdinate = bOrdinate + str(digit)
+    fOrdinate = k - int(k)
+
+  if (negFlag):
+    bMantissa, bOrdinate = twosComplement(bMantissa, bOrdinate, q1, q2)
