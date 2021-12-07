@@ -1,7 +1,6 @@
 
 *.pdf
 *.pth
-*.json
 *.txt
 **/work
 **/data
