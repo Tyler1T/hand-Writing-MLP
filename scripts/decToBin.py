@@ -48,20 +48,26 @@ f.close()
 
 
 f = open("fc1_Weight.txt", "w")
-for j in range(0, 50):
+for j in range(0, 200):
     for i in data3['fc1_Weight'][j]:
         f.write(convert(i, 1, 15) + "\n")
+    for i in range(1024-784):
+        f.write("\n")
 f.close()
 
 
 f = open("fc2_Weight.txt", "w")
-for j in range(0, 10):
+for j in range(0, 50):
     for i in data4['fc2_Weight'][j]:
         f.write(convert(i, 1, 15) + "\n")
+    for i in range(256-200):
+        f.write("\n")
 f.close()
 
 f = open("fc3_Weight.txt", "w")
 for j in range(0, 10):
     for i in data5['fc3_Weight'][j]:
         f.write(convert(i, 1, 15) + "\n")
+    for i in range(64-50):
+        f.write("\n")
 f.close()
