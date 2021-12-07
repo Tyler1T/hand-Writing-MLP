@@ -1,6 +1,6 @@
 module network (data, result);
     input logic [0:15] data [783:0];
-    output logic [0:15] result[9:0]
+    output logic [0:15] result[9:0];
     wire [0:15] layer1_output[199:0];
     wire [0:15] layer2_output[49:0];
 
@@ -266,7 +266,6 @@ module network (data, result);
     neuron_layer3 n3_7 (layer2_output, 7, result[7]);
     neuron_layer3 n3_8 (layer2_output, 8, result[8]);
     neuron_layer3 n3_9 (layer2_output, 9, result[9]);
-
 
 
 endmodule // network
