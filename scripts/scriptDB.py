@@ -20,8 +20,10 @@ with open("fc2_Weight.json", "r") as file:
     data3 = {
         "fc2_Weight":np.array(json.load(file)["fc2_Weight"]).tolist()
     }
+
+
 def convert(n, q1, q2):
-  
+
   if (n < 0):
     negFlag = 1
   else:
@@ -41,7 +43,7 @@ def convert(n, q1, q2):
   #Index of 'b'
   bIdx = bintegerb.find('b')
   bintegerb = bintegerb[bIdx + 1 :]
-  
+
   #For positive numbers, go on including a '0' at the MSB
   while (len(bintegerb) < q1):
     bintegerb = '0' + bintegerb
@@ -59,7 +61,7 @@ def convert(n, q1, q2):
     bfractionalb = bfractionalb + str(digit)
     ffractionalb = k - int(k)
 
-  
+
 
   if (negFlag): #if the decimal number is negative
     bintegerb, bfractionalb = twosComplement(bintegerb, bfractionalb, q1, q2)
@@ -87,7 +89,7 @@ def twosComplement(bintegerb, bfractionalb, q1, q2):
     elif bString[i] == '0':
       bString[i] = carry
       carry = '0'
-    
+
     elif bString[i] == '1':
       bString[i] = '0'
 
