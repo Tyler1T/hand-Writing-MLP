@@ -10,7 +10,7 @@ module stimulus();
   //for five vector numbers we need 3 bits
   logic [31:0] vectornum, errors;
 
-  //the testvector file should be 2 rows each 47 bits wide
+  //the testvector file should be 2 rows each 48 bits wide
   logic [47:0] testVector[1:0];
 
 

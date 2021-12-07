@@ -8,7 +8,7 @@ module stimulus();
   //for five vector numbers we need 3 bits
   logic [31:0] vectornum, errors;
 
-  //the testvector file should be 2 rows each 47 bits wide
+  //the testvector file should be 784 rows each 16 bits wide
   logic [15:0] testVector[783:0];
 
 
@@ -22,7 +22,7 @@ module stimulus();
 
   initial
     begin
-      $readmemb("testvector.tv", testVector);
+      $readmemb("input0.dat", testVector);
       vectornum = 0; errors = 0;
     end
 
